@@ -5,14 +5,12 @@ input_arr = ["FOOF", "OCOO", "OOOH", "FOOO"]
 
 def get_coords(arr: list):
     coords = {}
-    foods = []
     print("Charlie: 1\nHome: 2")
     f_cnt = 3 #foods start from 3
     for i in range(len(arr)):
         for j in range(len(arr[0])):
             if arr[i][j] == 'F':
-                foods.append(f_cnt)
-                coords[foods[-1]] = [i, j]
+                coords[f_cnt] = [i, j]
                 print("Food: ", f_cnt)
                 f_cnt += 1
             elif arr[i][j] == 'C':
@@ -21,14 +19,13 @@ def get_coords(arr: list):
                 coords[2] = [i, j] #home is 2 
     
     print("\nCoordinates: \n", coords)
-    return coords, foods
+    return coords
 
 def cost_fn(coords_a, coords_b):
     return abs(coords_a[0] - coords_b[0]) + \
         abs(coords_a[1] - coords_b[1])
 
 def get_cost(coords: list, foods: list):
-    print("\ncost fn")
     cost = {}
     for i in foods:
         for j in foods:
@@ -37,14 +34,12 @@ def get_cost(coords: list, foods: list):
                     cost[i, j] = cost[j, i]
                 else:
                     cost[i, j] = cost_fn(coords[i], coords[j])
-
-    for i in foods:
         cost[1, i] = cost_fn(coords[1], coords[i])
         cost[i, 2] = cost_fn(coords[i], coords[2])
 
+    print("\ncost fn")
     print(cost)
     return cost
-
 
 def min_path_cost(start: str, coords: list, cost: dict, seen=[]):
     min_cost = np.inf
@@ -60,16 +55,16 @@ def min_path_cost(start: str, coords: list, cost: dict, seen=[]):
             min_cost = min(
                 min_cost,
                 cost[start, ci] +
-                min_path_cost(ci, coords, cost, deepcopy(seen))
+                    min_path_cost(ci, coords, cost, deepcopy(seen))
             )
     
     return min_cost
         
 
 def solve(arr: list):
-    coords, foods = get_coords(arr)
+    coords = get_coords(arr)
     
-    cost = get_cost(coords, foods)
+    cost = get_cost(coords, sorted(coords)[2:])
 
     print("min: ", min_path_cost(1, sorted(coords)[2:], cost))
 
