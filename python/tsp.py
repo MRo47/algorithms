@@ -44,9 +44,7 @@ def get_cost(coords: list, foods: list):
 def min_path_cost(start: str, coords: list, cost: dict, seen=[]):
     min_cost = np.inf
     seen.append(start)
-    print("\nseen: ", seen)
     if len(seen) == len(coords)+1:
-        print("end")
         return [start, 2], cost[seen[-1], 2]
 
     ret_seq = [start]
