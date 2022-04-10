@@ -3,6 +3,7 @@ import numpy as np
 
 input_arr = ["FOOF", "OCOO", "OOOH", "FOOO"]
 
+# convert input data into coordinates
 def get_coords(arr: list):
     coords = {}
     print("Charlie: 1\nHome: 2")
@@ -21,10 +22,12 @@ def get_coords(arr: list):
     print("\nCoordinates: \n", coords)
     return coords
 
+# cost between 2 nodes is manhattan distance
 def cost_fn(coords_a, coords_b):
     return abs(coords_a[0] - coords_b[0]) + \
         abs(coords_a[1] - coords_b[1])
 
+# computes cost between all nodes
 def get_cost(coords: list, foods: list):
     cost = {}
     for i in foods:
@@ -38,9 +41,10 @@ def get_cost(coords: list, foods: list):
         cost[i, 2] = cost_fn(coords[i], coords[2])
 
     print("\ncost fn")
-    print(cost)
+    print(cost, "\n")
     return cost
 
+# computes the minimum cost for sequence
 def min_path_cost(start: str, coords: list, cost: dict, seen=[]):
     min_cost = np.inf
     seen.append(start)
@@ -63,7 +67,7 @@ def min_path_cost(start: str, coords: list, cost: dict, seen=[]):
     
     return ret_seq, min_cost
         
-
+# top level call
 def solve(arr: list):
     coords = get_coords(arr)
     
@@ -73,5 +77,5 @@ def solve(arr: list):
 
     print("min: ", min_path_cost(1, foods, cost))
 
-
-solve(input_arr)
+if __name__ == "__main__":
+    solve(input_arr)
