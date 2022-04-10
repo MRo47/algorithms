@@ -32,11 +32,11 @@ The problem can be represented as an undirected weighted graph since every city 
 
 The solution can then be formulated as below.
 
-<!-- S = 1 \\
+<!-- \\S = 1 \\
 H = 2 \\
-C_N = \{\ 2+N:N\epsilon\mathbb{N} \}  \\
+C_N = \{\ 2+i:i\epsilon\mathbb{N} \}  \\
 L_{MN} = Cost(M,N) \\
-g(S, [C_N]) = min \{\ L_{S,N} + g(L_{S,C_0} , [C_N]-[C_0]) + L_{C_NH}:
-                N\epsilon C_N \} -->
+g(S, [C_N]) = min \{\ L_{S,N} + g(C_i , [C_N]-[C_i]): i\epsilon\mathbb{N} \} \\
+g(C_N, H) = L_{C_NH} -->
 
 <img src="images/equations/tsp_eqn.png"/>
