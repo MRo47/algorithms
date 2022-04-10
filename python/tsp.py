@@ -1,24 +1,24 @@
 from copy import deepcopy
 import numpy as np
 
-input_arr = ["FOOF", "OCOO", "OOOH", "FOOO"]
+input_arr = ["COOC", "OSOO", "OOOH", "COOO"]
 
 # convert input data into coordinates
 def get_coords(arr: list):
     coords = {}
     key = {
-        1: 'C', #charlie is 1
+        1: 'S', #salesman is 1
         2: 'H' #home is 2
     }
 
     f_cnt = 3 #foods start from 3
     for i in range(len(arr)):
         for j in range(len(arr[0])):
-            if arr[i][j] == 'F':
+            if arr[i][j] == 'C':
                 coords[f_cnt] = [i, j]
-                key[f_cnt] = "F{},{}".format(i, j)
+                key[f_cnt] = "C{},{}".format(i, j)
                 f_cnt += 1
-            elif arr[i][j] == 'C':
+            elif arr[i][j] == 'S':
                 coords[1] = [i, j]
             elif arr[i][j] == 'H':
                 coords[2] = [i, j]
