@@ -34,13 +34,13 @@ def get_cost(coords: list, foods: list):
         for j in foods:
             if i != j:
                 if (j, i) in cost:
-                    cost[(i, j)] = cost[j, i]
+                    cost[i, j] = cost[j, i]
                 else:
-                    cost[(i, j)] = cost_fn(coords[i], coords[j])
+                    cost[i, j] = cost_fn(coords[i], coords[j])
 
     for i in foods:
-        cost[(1, i)] = cost_fn(coords[1], coords[i])
-        cost[(i, 2)] = cost_fn(coords[i], coords[2])
+        cost[1, i] = cost_fn(coords[1], coords[i])
+        cost[i, 2] = cost_fn(coords[i], coords[2])
 
     print(cost)
     return cost
@@ -52,14 +52,14 @@ def min_path_cost(start: str, coords: list, cost: dict, seen=[]):
     print("\nseen: ", seen)
     if len(seen) == len(coords)+1:
         print("end")
-        return cost[(seen[-1], 2)]
+        return cost[seen[-1], 2]
 
     for ci in coords:
         if ci not in seen:
             print("start: ", start, " end: ", ci)
             min_cost = min(
                 min_cost,
-                cost[(start, ci)] +
+                cost[start, ci] +
                 min_path_cost(ci, coords, cost, deepcopy(seen))
             )
     
