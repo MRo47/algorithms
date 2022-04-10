@@ -1,7 +1,13 @@
 from copy import deepcopy
 import numpy as np
 
-input_arr = ["COOC", "OSOO", "OOOH", "COOO"]
+# print data
+def print_data(arr: list):
+    print("\nInput")
+    for line in arr:
+        for char in line:
+            print(" |", char, end='')
+        print(" |")
 
 # convert input data into coordinates
 def get_coords(arr: list):
@@ -11,7 +17,7 @@ def get_coords(arr: list):
         2: 'H' #home is 2
     }
 
-    f_cnt = 3 #foods start from 3
+    f_cnt = 3 #cities start from 3
     for i in range(len(arr)):
         for j in range(len(arr[0])):
             if arr[i][j] == 'C':
@@ -33,10 +39,10 @@ def cost_fn(coords_a, coords_b):
         abs(coords_a[1] - coords_b[1])
 
 # computes cost between all nodes
-def get_cost(coords: list, foods: list):
+def get_cost(coords: list, cities: list):
     cost = {}
-    for i in foods:
-        for j in foods:
+    for i in cities:
+        for j in cities:
             if i != j:
                 if (j, i) in cost:
                     cost[i, j] = cost[j, i]
@@ -53,6 +59,7 @@ def get_cost(coords: list, foods: list):
 def min_path_cost(start: str, coords: list, cost: dict, seen=[]):
     min_cost = np.inf
     seen.append(start)
+
     if len(seen) == len(coords)+1:
         return [start, 2], cost[seen[-1], 2]
 
@@ -76,11 +83,11 @@ def min_path_cost(start: str, coords: list, cost: dict, seen=[]):
 def solve(arr: list):
     coords, key = get_coords(arr)
     
-    foods = sorted(coords)[2:]
+    cities = sorted(coords)[2:]
 
-    cost = get_cost(coords, foods)
+    cost = get_cost(coords, cities)
 
-    min_path, min_cost = min_path_cost(1, foods, cost)
+    min_path, min_cost = min_path_cost(1, cities, cost)
 
     print("\nResult:")
     print("min path: ")
@@ -91,4 +98,6 @@ def solve(arr: list):
 
 
 if __name__ == "__main__":
+    input_arr = ["COOC", "OSOO", "OOOH", "COOO"]
     solve(input_arr)
+    print_data(input_arr)
