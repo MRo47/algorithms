@@ -6,21 +6,26 @@ input_arr = ["FOOF", "OCOO", "OOOH", "FOOO"]
 # convert input data into coordinates
 def get_coords(arr: list):
     coords = {}
-    print("Charlie: 1\nHome: 2")
+    key = {
+        1: 'C', #charlie is 1
+        2: 'H' #home is 2
+    }
+
     f_cnt = 3 #foods start from 3
     for i in range(len(arr)):
         for j in range(len(arr[0])):
             if arr[i][j] == 'F':
                 coords[f_cnt] = [i, j]
-                print("Food: ", f_cnt)
+                key[f_cnt] = "F{},{}".format(i, j)
                 f_cnt += 1
             elif arr[i][j] == 'C':
-                coords[1] = [i, j] #charlie is 1
+                coords[1] = [i, j]
             elif arr[i][j] == 'H':
-                coords[2] = [i, j] #home is 2 
+                coords[2] = [i, j]
     
     print("\nCoordinates: \n", coords)
-    return coords
+    print("\nkey: ", key)
+    return coords, key
 
 # cost between 2 nodes is manhattan distance
 def cost_fn(coords_a, coords_b):
@@ -69,13 +74,21 @@ def min_path_cost(start: str, coords: list, cost: dict, seen=[]):
         
 # top level call
 def solve(arr: list):
-    coords = get_coords(arr)
+    coords, key = get_coords(arr)
     
     foods = sorted(coords)[2:]
 
     cost = get_cost(coords, foods)
 
-    print("min: ", min_path_cost(1, foods, cost))
+    min_path, min_cost = min_path_cost(1, foods, cost)
+
+    print("\nResult:")
+    print("min path: ")
+    for node in min_path:
+        print(key[node])
+    
+    print("cost for min path: ", min_cost)
+
 
 if __name__ == "__main__":
     solve(input_arr)
