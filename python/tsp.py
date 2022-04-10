@@ -47,26 +47,33 @@ def min_path_cost(start: str, coords: list, cost: dict, seen=[]):
     print("\nseen: ", seen)
     if len(seen) == len(coords)+1:
         print("end")
-        return cost[seen[-1], 2]
+        return [start, 2], cost[seen[-1], 2]
+
+    ret_seq = [start]
 
     for ci in coords:
         if ci not in seen:
             print("start: ", start, " end: ", ci)
-            min_cost = min(
-                min_cost,
-                cost[start, ci] +
-                    min_path_cost(ci, coords, cost, deepcopy(seen))
-            )
+            seq, cost_here = min_path_cost(ci, coords, cost, deepcopy(seen))
+            cost_here += cost[start, ci]
+            if cost_here < min_cost:
+                min_cost = cost_here
+                seq_at_min = seq
+
+    print("min cost from: ", start, " is: ", min_cost, " seq: ", seq_at_min)
+    ret_seq.extend(seq_at_min)
     
-    return min_cost
+    return ret_seq, min_cost
         
 
 def solve(arr: list):
     coords = get_coords(arr)
     
-    cost = get_cost(coords, sorted(coords)[2:])
+    foods = sorted(coords)[2:]
 
-    print("min: ", min_path_cost(1, sorted(coords)[2:], cost))
+    cost = get_cost(coords, foods)
+
+    print("min: ", min_path_cost(1, foods, cost))
 
 
 solve(input_arr)
