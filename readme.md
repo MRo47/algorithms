@@ -39,4 +39,4 @@ L_{MN} = Cost(M,N) \\
 g(S, [C_N]) = min \{\ L_{S,N} + g(L_{S,C_0} , [C_N]-[C_0]) + L_{C_NH}:
                 N\epsilon C_N \} -->
 
-<img src="/home/myron/hack/tsp/images/equations/tsp_eqn.png" title="https://latex.codecogs.com/svg.image?\inline \bg{white}\\S = 1 \\H = 2 \\C_N = \{\ 2+N:N\epsilon\mathbb{N} \} \\L_{MN} = Cost(M,N) \\ g(S, [C_N]) = min \{\ L_{S,N} + g(L_{S,C_0} , [C_N]-[C_0]) + L_{C_NH}: N\epsilon C_N \}" />
+<img src="images/equations/tsp_eqn.png"/>
