@@ -7,14 +7,14 @@ def get_coords(arr: list):
     coords = {}
     foods = []
     print("Charlie: 1\nHome: 2")
-    cnt = 3 #foods start from 3
-    for i in range(4):
-        for j in range(4):
+    f_cnt = 3 #foods start from 3
+    for i in range(len(arr)):
+        for j in range(len(arr[0])):
             if arr[i][j] == 'F':
-                foods.append(cnt)
+                foods.append(f_cnt)
                 coords[foods[-1]] = [i, j]
-                print("Food: ", cnt)
-                cnt += 1
+                print("Food: ", f_cnt)
+                f_cnt += 1
             elif arr[i][j] == 'C':
                 coords[1] = [i, j] #charlie is 1
             elif arr[i][j] == 'H':
@@ -50,7 +50,7 @@ def min_path_cost(start: str, coords: list, cost: dict, seen=[]):
     min_cost = np.inf
     seen.append(start)
     print("\nseen: ", seen)
-    if len(seen) == 4:
+    if len(seen) == len(coords)+1:
         print("end")
         return cost[(seen[-1], 2)]
 
