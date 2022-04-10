@@ -34,9 +34,9 @@ The solution can then be formulated as below.
 
 <!-- \\S = 1 \\
 H = 2 \\
-C_N = \{\ 2+i:i\epsilon\mathbb{N} \}  \\
-L_{MN} = Cost(M,N) \\
-g(S, [C_N]) = min \{\ L_{S,N} + g(C_i , [C_N]-[C_i]): i\epsilon\mathbb{N} \} \\
-g(C_N, H) = L_{C_NH} -->
+C = \{\ 2+i:i\epsilon\mathbb{N} \}  \\
+L_{M,N} = Cost(M,N) \\
+g(S, [C]) = min \{\ L_{S,C_i} + g(C_i , [C]-[C_i]): i\epsilon\mathbb{N} \} \\
+g(C_N, H) = L_{C_N,H} -->
 
-<img src="images/equations/tsp_eqn.png"/>
+<img src="https://latex.codecogs.com/png.image?\large&space;\dpi{120}\bg{white}\\S&space;=&space;1&space;\\H&space;=&space;2&space;\\C&space;=&space;\{\&space;2&plus;i:i\epsilon\mathbb{N}&space;\}&space;&space;\\L_{M,N}&space;=&space;Cost(M,N)&space;\\g(S,&space;[C])&space;=&space;min&space;\{\&space;L_{S,C_i}&space;&plus;&space;g(C_i&space;,&space;[C]-[C_i]):&space;i\epsilon\mathbb{N}&space;\}&space;\\g(C_N,&space;H)&space;=&space;L_{C_N,H}&space;"/>
